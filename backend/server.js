@@ -3,6 +3,9 @@ import products from './data/Products.js';
 import dotvenv from 'dotenv';
 import connectDataBase from "./config/MongoDB.js"
 import ImportData from "./seed/seed.js";
+import productRoute from "./routes/ProductRoutes.js";
+
+
 dotvenv.config();
 connectDataBase();
 // LOAD PRODUCT FROM SERVER
@@ -14,7 +17,7 @@ const app = express();
 // 
 
 app.use('/api/import',ImportData);
-
+app.use('/api/products',productRoute);
 
 const PORT = process.env.PORT ||1000;
 app.listen(PORT,console.log(`Server running on port ${PORT}`))
