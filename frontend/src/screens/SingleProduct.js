@@ -1,76 +1,98 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
-import Message from "./../components/LoadingError/Error";
-import axios from "axios";
-
+import Message from "../components/LoadingError/Error";
+// import axios from "axios";
+import Loading from '../components/LoadingError/Loading.js';
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../redux/actions/ProductActions.js";
 const SingleProduct = ({ match }) => {
   // const product = products.find((p) => p._id === match.params.id);
   
-  const [product,setProduct] = useState({})
+  // const [product,setProduct] = useState({})
+  // useEffect(()=>{
+  //   const fetchProduct = async() =>{
+  //     const {data} = await axios.get(`/api/products/${match.params.id}`)
+  //     setProduct(data)
+  //   };
+  //   fetchProduct();
+  // },[match])
+  const productId = match.params.id;
+  const dispatch = useDispatch();
+
+  const productDetails = useSelector((state) => state.productDetails);
+  const {loading,error,product} = productDetails;
+
   useEffect(()=>{
-    const fetchProduct = async() =>{
-      const {data} = await axios.get(`/api/products/${match.params.id}`)
-      setProduct(data)
-    };
-    fetchProduct();
-  },[match])
+    dispatch(listProductDetails(productId));
+  },[dispatch,productId])
+
   return (
     <>
       <Header />
       <div className="container single-product">
         <div className="row">
-          <div className="col-md-6">
-            <div className="single-image">
-              <img src={product.image} alt={product.name} />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="product-dtl">
-              <div className="product-info">
-                <div className="product-name">{product.name}</div>
+          {
+            loading ? (
+              <div className="mb-5">
+                <Loading/>
               </div>
-              <p>{product.description}</p>
+            ): error ? (<Message variant="alert-danger">{error}</Message>)
+          :(<>
+              <div className="col-md-6">
+                <div className="single-image">
+                  <img src={product.image} alt={product.name} />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="product-dtl">
+                  <div className="product-info">
+                    <div className="product-name">{product.name}</div>
+                  </div>
+                  <p>{product.description}</p>
 
-              <div className="product-count col-lg-7 ">
-                <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Price</h6>
-                  <span>${product.price}</span>
-                </div>
-                <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Status</h6>
-                  {product.countInStock > 0 ? (
-                    <span>In Stock</span>
-                  ) : (
-                    <span>unavailable</span>
-                  )}
-                </div>
-                <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Reviews</h6>
-                  <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
-                  />
-                </div>
-                {product.countInStock > 0 ? (
-                  <>
+                  <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Quantity</h6>
-                      <select>
-                        {[...Array(product.countInStock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </select>
+                      <h6>Price</h6>
+                      <span>${product.price}</span>
                     </div>
-                    <button className="round-black-btn">Add To Cart</button>
-                  </>
-                ) : null}
+                    <div className="flex-box d-flex justify-content-between align-items-center">
+                      <h6>Status</h6>
+                      {product.countInStock > 0 ? (
+                        <span>In Stock</span>
+                      ) : (
+                        <span>unavailable</span>
+                      )}
+                    </div>
+                    <div className="flex-box d-flex justify-content-between align-items-center">
+                      <h6>Reviews</h6>
+                      <Rating
+                        value={product.rating}
+                        text={`${product.numReviews} reviews`}
+                      />
+                    </div>
+                    {product.countInStock > 0 ? (
+                      <>
+                        <div className="flex-box d-flex justify-content-between align-items-center">
+                          <h6>Quantity</h6>
+                          <select>
+                            {[...Array(product.countInStock).keys()].map((x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <button className="round-black-btn">Add To Cart</button>
+                      </>
+                    ) : null}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>)
+          }
+          
         </div>
 
         {/* RATING */}
