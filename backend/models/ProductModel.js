@@ -36,6 +36,14 @@ const productSchema = mongoose.Schema({
             type:Number,
             require: true,
         },
+        countInStock:{
+            type:Number,
+            require: true,
+        },
+        price:{
+            type:Number,
+            require: true,
+        },
         numReviews:{
             type:Number,
             require: true,

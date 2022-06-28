@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import Message from "../components/LoadingError/Error";
 import Loading from '../components/LoadingError/Loading.js';
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../redux/actions/ProductActions.js";
-const SingleProduct = ({ match }) => {
+const SingleProduct = ({ history,match }) => {
   // const product = products.find((p) => p._id === match.params.id);
   
   // const [product,setProduct] = useState({})
@@ -18,6 +18,7 @@ const SingleProduct = ({ match }) => {
   //   };
   //   fetchProduct();
   // },[match])
+  const [qty,setQty] = useState(1)
   const productId = match.params.id;
   const dispatch = useDispatch();
 
@@ -27,7 +28,11 @@ const SingleProduct = ({ match }) => {
   useEffect(()=>{
     dispatch(listProductDetails(productId));
   },[dispatch,productId])
-
+ 
+  const AddToCartHandle = (e)=>{
+    e.preventDefault();
+    history.push(`/cart/${productId}?qty=${qty}`);
+  }
   return (
     <>
       <Header />
@@ -84,7 +89,7 @@ const SingleProduct = ({ match }) => {
                             ))}
                           </select>
                         </div>
-                        <button className="round-black-btn">Add To Cart</button>
+                        <button oncClick = {AddToCartHandle} className="round-black-btn">Add To Cart</button>
                       </>
                     ) : null}
                   </div>

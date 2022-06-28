@@ -18,15 +18,14 @@ productRoute.get(
 productRoute.get(
     '/:id',
     asyncHandler(async(req,res)=>{
-        const products = await Product.findById(req.params.id);
-        if(products){
-            res.json(products)
+        const product = await Product.findById(req.params.id);
+        if(product){
+            res.json(product)
         }
         else{
             res.status(404);
             throw new Error('Product not found!');
         }
-        res.json(products);
     })
 )
 export default productRoute;
