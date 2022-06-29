@@ -89,7 +89,7 @@ const SingleProduct = ({ history,match }) => {
                             ))}
                           </select>
                         </div>
-                        <button oncClick = {AddToCartHandle} className="round-black-btn">Add To Cart</button>
+                        <button onClick = {AddToCartHandle} className="round-black-btn">Add To Cart</button>
                       </>
                     ) : null}
                   </div>
