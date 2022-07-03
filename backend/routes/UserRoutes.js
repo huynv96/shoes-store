@@ -27,24 +27,34 @@ userRoute.post(
     }),
 );
 
-//PROFILE
-userRoute.get(
-    '/profile',
+//REGISTER
+userRoute.post(
+    '/',
     protect,
     asyncHandler(async (req, res) => {
-        const user = await User.findById(req.user._id);
+        const { name, email, password } = req.body;
+        const userExists = await User.findOne({ email: email });
+        if (userExists) {
+            res.status(400);
+            throw new Error('User already exists');
+        }
+        const user = await User.create({
+            name,
+            email,
+            password,
+        });
         if (user) {
-            res.json({
+            res.status(201).json({
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                token: generateToken(user._id),
                 createdAt: user.createdAt,
             });
-        }
-        else{
-            res.status(401);
-            throw new Error('User Not Found');
+        } else {
+            res.status(400);
+            throw new Error('Invalid User Data');
         }
     }),
 );

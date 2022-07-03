@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema(
         password: {
             type: String,
             required: [true, 'Please Enter Your Password'],
-            minLength: [8, 'Password should be greater than 8 characters'],
+            // minLength: [8, 'Password should be greater than 8 characters'],
             select: false,
         },
         isAdmin: {
@@ -33,6 +33,15 @@ const userSchema = mongoose.Schema(
 userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
   };
+
+// Register
+userSchema.pre('save',async function (next) {
+    if (!this.isModified('password')) {
+        next();
+    }
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password, salt);
+})
 const User = mongoose.model('User', userSchema);
 
 export default User;
