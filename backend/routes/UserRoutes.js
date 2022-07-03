@@ -22,7 +22,7 @@ userRoute.post(
             });
         } else {
             res.status(401);
-            throw new Error('Invalid login');
+            throw new Error('Invalid Email or Password');
         }
     }),
 );

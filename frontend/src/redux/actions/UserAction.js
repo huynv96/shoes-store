@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS } from '../constants/UserContants';
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from '../constants/UserContants';
 
 //LOGIN
-export const login = (email, pasword) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST });
         const config = {
@@ -10,7 +10,7 @@ export const login = (email, pasword) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         };
-        const { data } = await axios.get(`/api/users/login`, { email, pasword }, config);
+        const { data } = await axios.post(`/api/users/login`, { email, password }, config);
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
@@ -20,3 +20,10 @@ export const login = (email, pasword) => async (dispatch) => {
         });
     }
 };
+
+//LOGOUT
+export const logout = (email, password) => (dispatch) =>{
+     localStorage.removeItem('userInfo');
+     dispatch({ type: USER_LOGOUT});
+     document.location.href = '/login';
+}
