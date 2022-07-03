@@ -10,6 +10,9 @@ import {
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
     USER_DETAILS_RESET,
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL,
 } from '../constants/UserContants';
 // LOGIN
 export const userLoginReducer = (state = { product: { reviews: [] } }, action) => {
@@ -42,7 +45,7 @@ export const userRegisterReducer = (state = { product: { reviews: [] } }, action
 };
 
 // USER DETAILS
-export const userDetailsReducer = (state = {user:{}}, action) => {
+export const userDetailsReducer = (state = { user: {} }, action) => {
     switch (action.type) {
         case USER_DETAILS_REQUEST:
             return { ...state, loading: true };
@@ -51,7 +54,21 @@ export const userDetailsReducer = (state = {user:{}}, action) => {
         case USER_DETAILS_FAIL:
             return { ...state, loading: false, error: action.payload };
         case USER_DETAILS_RESET:
-            return { user:{} };
+            return { user: {} };
+        default:
+            return state;
+    }
+};
+
+// USER DETAILS
+export const userUpdateProfileReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_UPDATE_PROFILE_REQUEST:
+            return { loading: true };
+        case USER_UPDATE_PROFILE_SUCCESS:
+            return { loading: false,success: true, user: action.payload };
+        case USER_UPDATE_PROFILE_FAIL:
+            return { loading: false,success: false, error: action.payload };
         default:
             return state;
     }
