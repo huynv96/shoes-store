@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
 const generateToken = (id) => {
-    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
     algorithm: 'HS256',
-    expiresIn: '10d',
+    expiresIn: '30d',
   });
 }
 
