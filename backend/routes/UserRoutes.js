@@ -30,7 +30,6 @@ userRoute.post(
 //REGISTER
 userRoute.post(
     '/',
-    protect,
     asyncHandler(async (req, res) => {
         const { name, email, password } = req.body;
         const userExists = await User.findOne({ email: email });
