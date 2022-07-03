@@ -5,12 +5,14 @@ import connectDataBase from "./config/MongoDB.js"
 import ImportData from "./seed/seed.js";
 import productRoute from "./routes/ProductRoutes.js";
 import { errorHandler } from "./middleware/Error.js";
+import userRoute from "./routes/UserRoutes.js";
 
 
 dotvenv.config();
 connectDataBase();
 // LOAD PRODUCT FROM SERVER
 const app = express();
+app.use(express.json());
 // app.get("/api/products",(req,res)=>{
 //     res.json(products)
 // })
@@ -19,8 +21,11 @@ const app = express();
 
 app.use('/api/import',ImportData);
 app.use('/api/products',productRoute);
+app.use('/api/users',userRoute);
+
 // ERROR HANDLER
 app.use(errorHandler);
+
 
 const PORT = process.env.PORT ||1000;
 app.listen(PORT,console.log(`Server running on port ${PORT}`))

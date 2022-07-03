@@ -2,7 +2,6 @@ import { PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from '.
 import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS } from '../constants/ProductContants';
 //GET ALL PRODUCT
 export const productListReducer = (state = { products: [] }, action) => {
-    console.log(`product ${action.type}`);
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return { loading: true, products: [] };

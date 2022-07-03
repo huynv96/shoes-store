@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header from './../components/Header';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart,removeItemsFromCart } from '../redux/actions/CartAction';
+import { addToCart, removeItemsFromCart } from '../redux/actions/CartAction';
 
 const CartScreen = ({ match, location, history }) => {
     window.scrollTo(0, 0);
@@ -21,15 +21,28 @@ const CartScreen = ({ match, location, history }) => {
     const checkOutHandler = () => {
         history.pushState('/login?redirect=shipping');
     };
-    const removeFromCartHandle = (id) =>{
+    const removeFromCartHandle = (id) => {
+        console.log('Remove ....');
+        console.log(cartItems.length);
         dispatch(removeItemsFromCart(id));
-    }
+    };
     return (
-        <Header /> >
-        (
+        <>
+            <Header />
             <div className="container">
                 {cartItems.length === 0 ? (
-                    <p>Loading ....</p>
+                    <div className='alert alert-info text-center mt-3'>
+                        Your cart is empty
+                        <Link
+                        className='btn btn-success mx-5 px-5 py-3'
+                        to='/'
+                        style={{
+                            fontSize:'12px'
+                        }}
+                        >
+                        SHOPPING NOW
+                        </Link>
+                    </div>
                 ) : (
                     <>
                         <div className=" alert alert-info text-center mt-3">
@@ -41,9 +54,10 @@ const CartScreen = ({ match, location, history }) => {
                         {/* cartiterm */}
                         {cartItems.map((item, index) => (
                             <div key={index} className="cart-iterm row">
-                                <div 
-                                onClick={removeFromCartHandle(item.product)}
-                                className="remove-button d-flex justify-content-center align-items-center">
+                                <div
+                                    onClick={() => removeFromCartHandle(item.product)}
+                                    className="remove-button d-flex justify-content-center align-items-center"
+                                >
                                     <i className="fas fa-times"></i>
                                 </div>
                                 <div className="cart-image col-md-3">
@@ -97,7 +111,7 @@ const CartScreen = ({ match, location, history }) => {
                     </>
                 )}
             </div>
-        )
+        </>
     );
 };
 

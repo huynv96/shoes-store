@@ -5,6 +5,7 @@ const connectDataBase = async() =>{
             {useUnifiedTopology:true,
             useNewUrlParser:true,
         });
+        console.log('Connected to Mongo DB')
     }
     catch(error){
         console.log(`Error:${error.message}`);
