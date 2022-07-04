@@ -3,7 +3,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { productListReducer, productDetailsReducer } from './reducer/ProductReducer.js';
 import { cartReducer } from './reducer/CartReducer';
-import { userLoginReducer, userRegisterReducer,userDetailsReducer, userUpdateProfileReducer } from './reducer/UserReducer';
+import {
+    userLoginReducer,
+    userRegisterReducer,
+    userDetailsReducer,
+    userUpdateProfileReducer,
+} from './reducer/UserReducer';
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -20,11 +25,17 @@ const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
 // Login
 const userInfoFromLocalStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
 
+// Shipping Address
+const ShippingAddressFromLocalStorage = localStorage.getItem('shippingAddress')
+    ? JSON.parse(localStorage.getItem('shippingAddress'))
+    : {};
+
 const initialState = {
     cart: {
         cartItems: cartItemsFromLocalStorage,
     },
     userLogin: { userInfo: userInfoFromLocalStorage },
+    userUpdateProfile:ShippingAddressFromLocalStorage
 };
 const middleware = [thunk];
 
