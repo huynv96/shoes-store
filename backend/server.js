@@ -6,6 +6,7 @@ import ImportData from "./seed/seed.js";
 import productRoute from "./routes/ProductRoutes.js";
 import { errorHandler } from "./middleware/Error.js";
 import userRoute from "./routes/UserRoutes.js";
+import orderRoute from "./routes/OrderRoutes.js";
 
 
 dotvenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/import',ImportData);
 app.use('/api/products',productRoute);
 app.use('/api/users',userRoute);
+app.use('/api/orders',orderRoute);
 
 // ERROR HANDLER
 app.use(errorHandler);
