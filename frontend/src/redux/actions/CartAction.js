@@ -30,7 +30,6 @@ export const removeItemsFromCart = (id) => async (dispatch, getState) => {
 
   // SAVE SHIPPING ADDRESS
 export const saveShippingAddress = (data) => async (dispatch) => {
-  console.log(data)
     dispatch({
       type: CART_SAVE_SHIPPING_ADDRESS,
       payload: data,
@@ -41,7 +40,6 @@ export const saveShippingAddress = (data) => async (dispatch) => {
 
   // SAVE PAYMENT METHOD
 export const savePaymentMethod = (data) => async (dispatch) => {
-  console.log(data)
     dispatch({
       type: CART_SAVE_PAYMETN_METHOD,
       payload: data,

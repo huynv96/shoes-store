@@ -24,15 +24,17 @@ const PlaceOrderScreen = ({ history }) => {
     );
     const orderCreate = useSelector((state) => state.orderCreate);
     const { order, success, error } = orderCreate;
+    console.log(orderCreate);
     useEffect(() => {
         if (success) {
+            
             history.push(`/order/${order._id}`);
             dispatch({ type: ORDER_CREATE_RESET });
         }
     }, [dispatch, history, success, order]);
-
     const placeOrderHandler = (e) => {
         e.preventDefault();
+
         dispatch(
             createOrder({
                 orderItems: cart.cartItems,

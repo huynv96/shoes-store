@@ -24,7 +24,7 @@ app.use('/api/import',ImportData);
 app.use('/api/products',productRoute);
 app.use('/api/users',userRoute);
 app.use('/api/orders',orderRoute);
-
+app.use('/api/congfig/paypal',(req,res) =>{res.send(process.env.PAYPAL_CLIENT_SECRET)});
 // ERROR HANDLER
 app.use(errorHandler);
 
