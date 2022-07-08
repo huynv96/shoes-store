@@ -22,8 +22,6 @@ const CartScreen = ({ match, location, history }) => {
         history.push('/login?redirect=shipping');
     };
     const removeFromCartHandle = (id) => {
-        console.log('Remove ....');
-        console.log(cartItems.length);
         dispatch(removeItemsFromCart(id));
     };
     return (
