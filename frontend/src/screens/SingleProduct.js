@@ -29,7 +29,6 @@ const SingleProduct = ({ history, match }) => {
 
     const productDetails = useSelector((state) => state.productDetails);
     const { loading, error, product } = productDetails;
-    console.log(product.reviews.length);
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
     const productReviewCreate = useSelector((state) => state.productReviewCreate);
@@ -40,7 +39,7 @@ const SingleProduct = ({ history, match }) => {
     } = productReviewCreate;
     useEffect(() => {
         if (successCreateReview) {
-            alert('Review Submitted');
+            // alert('Review Submitted');
             setRating(0);
             setComment('');
             dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
@@ -53,7 +52,9 @@ const SingleProduct = ({ history, match }) => {
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createProductReview(productId, rating, comment));
+        dispatch(
+            createProductReview({productId:productId, rating:Number(rating),comment:comment})
+            );
     };
     return (
         <>
@@ -125,8 +126,8 @@ const SingleProduct = ({ history, match }) => {
                 <div className="row my-5">
                     <div className="col-md-6">
                         <h6 className="mb-3">REVIEWS</h6>
-                        {product.reviews.length === 0 && <Message variant="alert-info mt-3">No Reviews</Message>}
-                        {product.reviews.map((review) => (
+                        {!product.reviews || product.reviews.length === 0 && <Message variant="alert-info mt-3">No Reviews</Message>}
+                        {product.reviews && product.reviews.map((review) => (
                             <div key={review._id} className="mb-5 mb-md-3 bg-light p-3 shadow-sm rounded">
                                 <strong>{review.name}</strong>
                                 <Rating value={review.rating} />
