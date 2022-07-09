@@ -12,6 +12,12 @@ const reviewSchema = mongoose.Schema({
         type:String,
         require:true,
     },
+    createdAt:{
+        type:Date,
+    },
+    updatedAt:{
+        type:Date,
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         require:true,

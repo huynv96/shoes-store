@@ -6,6 +6,7 @@ import ImportData from "./seed/seed.js";
 import productRoute from "./routes/ProductRoutes.js";
 import { errorHandler } from "./middleware/Error.js";
 import userRoute from "./routes/UserRoutes.js";
+import orderRoute from "./routes/OrderRoutes.js";
 
 
 dotvenv.config();
@@ -22,7 +23,8 @@ app.use(express.json());
 app.use('/api/import',ImportData);
 app.use('/api/products',productRoute);
 app.use('/api/users',userRoute);
-
+app.use('/api/orders',orderRoute);
+app.use('/api/congfig/paypal',(req,res) =>{res.send(process.env.PAYPAL_CLIENT_SECRET)});
 // ERROR HANDLER
 app.use(errorHandler);
 

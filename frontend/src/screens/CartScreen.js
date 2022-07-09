@@ -19,11 +19,9 @@ const CartScreen = ({ match, location, history }) => {
 
     const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
     const checkOutHandler = () => {
-        history.pushState('/login?redirect=shipping');
+        history.push('/login?redirect=shipping');
     };
     const removeFromCartHandle = (id) => {
-        console.log('Remove ....');
-        console.log(cartItems.length);
         dispatch(removeItemsFromCart(id));
     };
     return (
