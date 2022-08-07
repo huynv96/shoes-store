@@ -1,0 +1,107 @@
+.topnav {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* height: var(--topnav-height); */
+    border-color: rgba(231,234,243,.7);
+    border-width: 0 0 0.0625rem 0;
+    border-style: solid;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--main-bg);
+    z-index: 10;
+}
+.topnav__search {
+    position: relative;
+    height: 50px;
+    background-color: var(--main-bg);
+    display: flex;
+    align-items: center;
+    /* box-shadow: var(--box-shadow); */
+    border-radius: var(--border-radius);
+    border-width: 0.0625rem;
+    overflow: hidden;
+    margin-right: 30px;
+}
+
+.topnav__search > input {
+    height: 100%;
+    width: 100%;
+    padding: 10px 60px 10px 20px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    border-color: rgba(231,234,243,.7);
+    color: var(--txt-color);
+    background-color: var(--main-bg);
+}
+
+.topnav__search > i {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 20px;
+}
+
+.topnav__right {
+    display: flex;
+    align-items: center;
+}
+
+.topnav__right-item ~ .topnav__right-item {
+    margin-left: 30px;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-color: rgba(231,234,243,.7);
+    /* border-bottom-width: 0.01px;
+    border-style: solid; */
+}
+
+.notification-item:hover {
+    background-color: var(--second-bg);
+}
+
+.notification-item > i {
+    margin-right: 20px;
+    font-size: 1.5rem;
+}
+
+.topnav__right-user {
+    display: flex;
+    align-items: center;
+}
+
+.topnav__right-user__image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.topnav__right-user__image > img {
+    width: 100%;
+}
+
+.topnav__right-user__name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.topnav_menu_mobile{
+    font-size: 2.5rem;
+    display: none;
+}
+@media (max-width: 740px){
+    .topnav__search,.topnav__right-user__name{
+        display: none;
+    }
+    .topnav_menu_mobile{
+        display: block;
+    }
+}

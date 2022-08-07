@@ -1,0 +1,10 @@
+.orders{
+    padding: 30px 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.orders__content{
+    border: 0.0625rem solid rgba(231,234,243,.7);
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+}

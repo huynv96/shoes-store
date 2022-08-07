@@ -1,0 +1,10 @@
+[
+    {
+        "icon": "fa fa-trash-alt",
+        "content": "Delete"
+    },
+    {
+        "icon": "fa fa-pen",
+        "content": "Edit"
+    }
+]

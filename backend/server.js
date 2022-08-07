@@ -19,7 +19,9 @@ app.use(express.json());
 // })
 // LOAD SINGLE PRODUCT FROM SERVER
 // 
-
+app.get('/',(req,res)=>{
+    res.send("<h2>Hi there</h2>")
+});
 app.use('/api/import',ImportData);
 app.use('/api/products',productRoute);
 app.use('/api/users',userRoute);

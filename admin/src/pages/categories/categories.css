@@ -1,0 +1,40 @@
+.categories {
+  padding: 30px 3%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.categories__content {
+  border: 0.0625rem solid rgba(231, 234, 243, 0.7);
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
+}
+.categories__content textarea{
+  resize: vertical; 
+  max-height: 200px;
+}
+.btn__create button {
+  width: 100%;
+}
+.dropdown .fa-ellipsis-h {
+  padding: 6px 12px;
+  border: 1px solid rgba(108, 117, 125, 0.25);
+  cursor: pointer;
+}
+.action-item{
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    cursor: pointer;
+}
+.action-item:hover{
+    background:var(--second-bg);
+}
+.action-item i{
+    margin-right: 10px;
+}
+.categories .dropdown__content{
+    right: 60px;
+}
+.categories_tbl{
+  overflow: auto;
+  margin-top: 20px;
+}

@@ -1,0 +1,32 @@
+.layout {
+    color: var(--txt-color);
+}
+
+.layout__content {
+    padding-left: var(--sidebar-width);
+    background-color: var(--second-bg);
+    min-height: 100vh;
+    transition: min-width .2s;
+    transition-timing-function: ease-in-out;
+}
+.layout__content.inactive{
+    padding-left: 100px;
+}
+.layout__content-main {
+    padding-top: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+@media (max-width: 740px){
+    .layout__content{
+        padding-left: 0;
+    }
+    .layout__content-main{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .layout__content.inactive{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
