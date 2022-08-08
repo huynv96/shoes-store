@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Grid from "../../components/grid/Grid";
 import Button from "../../components/button/Button";
 import "./categories.css";

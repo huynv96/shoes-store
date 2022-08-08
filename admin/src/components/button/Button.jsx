@@ -4,8 +4,10 @@ import "./button.css";
 const Button = (props) => {
   const shape = props.shape ? "btn-" + props.shape : "round-1";
   const type = props.type ? "btn-" + props.type : "success";
+  const onSubmit = props.isOnsubmit ? 'submit': 'button';
   return(
     <button
+        type={onSubmit}
         className={`btn ${type} ${shape}`}
         onClick={props.onClick ? () => props.onClick() : null}
     >

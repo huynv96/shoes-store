@@ -10,7 +10,9 @@ import ProductAdd from '../pages/products/ProductAdd';
 import Orders from '../pages/orders/Orders';
 import Categories from '../pages/categories/Categories';
 import Users from '../pages/users/Users';
-
+import Login from '../pages/login/Login';
+import PrivateRouter from './PrivateRouter';
+import NotFound from '../pages/notFound/NotFound';
 const Routes = () => {
     return (
         <Switch>
@@ -22,6 +24,8 @@ const Routes = () => {
             <Route path='/orders' component={Orders}/>
             <Route path='/categories' component={Categories}/>
             <Route path='/users' component={Users}/>
+            <Route path='/login' component={Login}/>
+            <Route path='*' component={NotFound}/>
         </Switch>
     )
 }

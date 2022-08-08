@@ -56,7 +56,10 @@ color: #ffffff;
 background: #2ecc71;
 color: #ffffff;
 }
-
+.btn-submit {
+  background: #2ecc71;
+  color: #ffffff;
+  }
 .btn-success:hover {
 background: #27ae60;
 color: #ffffff;
