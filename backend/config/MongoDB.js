@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 const connectDataBase = async() =>{
     try{
-        const connection = await mongoose.connect(process.env.MONGO_URL,
+        // mongodb environment variables
+        const dbConnectionURL = {
+            'REMOTE_DB_URL': process.env.MONGODB_URI || 'mongodb://mongo:27017/shoesDatabase' //atlas url
+        };
+        const connection = await mongoose.connect(dbConnectionURL.REMOTE_DB_URL,
             {useUnifiedTopology:true,
             useNewUrlParser:true,
         });

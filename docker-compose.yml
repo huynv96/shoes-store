@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:5.0
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    container_name: mongo-db
+    volumes:
+      - ./backend/db/:/data/db
+    networks:
+      - common
+  api: 
+    container_name: mern-api
+    restart: always
+    build:
+    # Location to the Dockerfile
+      context: ./backend
+      # Name of the Dockerfile
+      dockerfile: ./Dockerfile
+    ports:
+    # host port:container port
+      - "5000:5000"
+    command: npm run server 
+    networks:
+    - common
+    volumes:
+      -  ./backend/volumes:/usr/app/src  
+    environment:
+      PORT: 5000
+      MONGO_URL: 'mongodb://mongo/shoesDatabase'
+      NODE_ENV: 'development'
+    depends_on:
+      - mongo
+  ui: 
+    container_name: mern-ui
+    restart: always
+    build:
+    # Location to the Dockerfile
+      context: ./frontend
+      # Name of the Dockerfile
+      dockerfile: ./Dockerfile
+    ports:
+    # host port:container port
+      - 3000:3000
+    volumes:
+      -  ./frontend/volumes:/usr/app/src  
+    networks:
+    - common
+    depends_on:
+      - api
+networks:
+  common:
